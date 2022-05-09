@@ -10,6 +10,9 @@
     "start:vue2": "yarn workspace vue2 run start",
     "start:vue3": "yarn workspace vue3 run start"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "workspaces": {
     "packages": ["packages/*"],
     "nohoist": ["**/vue", "**/vue/**", 

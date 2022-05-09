@@ -15,6 +15,9 @@
   "engines": {
     "node": "*"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@zcatpkg/gogocode": "^1.0.48"
   }

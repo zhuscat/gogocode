@@ -9,6 +9,9 @@
     "@zcatpkg/gogocode",
     "ast"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "transform.js",
   "author": "chibing",
   "license": "ISC",

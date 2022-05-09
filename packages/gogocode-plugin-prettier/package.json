@@ -9,6 +9,9 @@
     "@zcatpkg/gogocode",
     "prettier"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "chibing.fy",
   "license": "ISC",
   "dependencies": {

@@ -25,6 +25,9 @@
     "lodash": "^4.17.21",
     "prettier": "^2.2.1"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "./coverage/",

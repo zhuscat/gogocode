@@ -31,6 +31,9 @@
         "type": "git",
         "url": "git@github.com:zhuscat/gogocode.git"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "author": "yexi",
     "license": "MIT",
     "devDependencies": {

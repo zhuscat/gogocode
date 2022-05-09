@@ -31,5 +31,8 @@
   "license": "ISC",
   "dependencies": {
     "@zcatpkg/gogocode": "^1.0.48"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
