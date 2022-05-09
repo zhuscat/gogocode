@@ -208,10 +208,10 @@ const core = {
                             leading: item.leading,
                             trailing: item.trailing,
                         }
-                    }), ...replacerAst.comments];
+                    }), ...(replacerAst.comments || [])];
                 }
                 if (replacerTrailingComments.length === 0 && originTrailingComments.length > 0) {
-                    replacerAst.comments = [...replacerAst.comments, ...originTrailingComments.map(item => {
+                    replacerAst.comments = [...(replacerAst.comments || []), ...originTrailingComments.map(item => {
                         return {
                             type: item.type,
                             value: item.value,
