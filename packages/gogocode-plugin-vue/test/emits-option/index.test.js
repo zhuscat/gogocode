@@ -1,5 +1,5 @@
 const path = require('path');
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const transform = require('../../src/emits-option');
 test('emits-option: not has emits properties', () => {
     expect(() => {

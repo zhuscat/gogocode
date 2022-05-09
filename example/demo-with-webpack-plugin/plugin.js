@@ -1,5 +1,5 @@
 // transform-var-to-let-plugin.js
-const $ = require('gogocode')
+const $ = require('@zcatpkg/gogocode')
 
 const pluginName = 'TransformVarToLetPlugin'
 

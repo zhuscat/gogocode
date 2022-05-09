@@ -1,4 +1,4 @@
-const gogocode = require('gogocode')
+const gogocode = require('@zcatpkg/gogocode')
 const fs = require('fs')
 const kebabCase = require('lodash/kebabCase')
 const path = require('path')

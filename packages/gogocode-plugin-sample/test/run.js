@@ -1,4 +1,4 @@
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const t = require('../transform');
 const path = require('path');
 const fs = require('fs');

@@ -1,5 +1,5 @@
 const path = require('path');
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const transform = require('../../src/v-if-v-for');
 test('v-if-v-for', () => {
     expect(() => {

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const transform = require('../../src/v-model-pro');
 test('v-model: test remove .sync attr', () => {
     expect(() => {

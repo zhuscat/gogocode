@@ -3,7 +3,7 @@
  * https://gogocode.io/
  */
 const glob = require('glob');
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 
 glob('./code/**/*.js', function (err, files) {
    

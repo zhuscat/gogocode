@@ -1,4 +1,4 @@
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const path = require('path');
 const prettier = require('prettier');
 const fs = require('fs');

@@ -1,4 +1,4 @@
-const $ = require('gogocode')
+const $ = require('@zcatpkg/gogocode')
 
 module.exports = function () {
     return {

@@ -1,4 +1,4 @@
-declare module 'gogocode' {
+declare module '@zcatpkg/gogocode' {
   import * as t from '@babel/types';
   import ASTNode = t.Node;
 

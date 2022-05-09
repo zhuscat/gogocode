@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const transform = require('../../src/v-on-native-modifier-removed');
 test('v-on-native-modifier-removed', () => {
     expect(() => {

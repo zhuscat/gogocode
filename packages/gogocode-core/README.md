@@ -31,7 +31,7 @@ const code = `
 创建一个 AST 实例
 
 ```javascript
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const AST = $(code);
 ```
 -----

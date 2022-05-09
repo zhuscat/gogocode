@@ -2,7 +2,7 @@
  * gogocode 简单示例
  * https://gogocode.io/
  */
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 
 const from = `
 import a from 'a';

@@ -28,7 +28,7 @@ const b = 2;
 ### Transform With GoGoCode
 
 ```javascript
-const $ = require('gogocode');
+const $ = require('@zcatpkg/gogocode');
 const script = $(source);
 // use $_$ as a wildcard to match AST element at any position you want
 const aAssignment = script.find('const a = $_$');
