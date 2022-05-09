@@ -8,6 +8,6 @@
     "packages/gogocode-plugin-element",
     "packages/gogocode-starter"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "npmClient": "npm"
 }
