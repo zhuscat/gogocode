@@ -1,6 +1,6 @@
 {
   "name": "@zcatpkg/gogocode-plugin-sample",
-  "version": "0.0.10",
+  "version": "1.1.0",
   "description": "gogocode-plugin-sample",
   "scripts": {
     "start": "node ./test/run.js"
