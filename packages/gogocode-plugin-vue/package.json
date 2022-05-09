@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-plugin-vue",
+  "name": "@zcatpkg/gogocode-plugin-vue",
   "version": "1.0.29",
   "description": "",
   "main": "index.js",

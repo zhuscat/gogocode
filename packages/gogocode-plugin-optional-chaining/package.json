@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-plugin-optional-chaining",
+  "name": "@zcatpkg/gogocode-plugin-optional-chaining",
   "version": "0.0.1",
   "description": "gogocode-plugin-optional-chaining",
   "scripts": {

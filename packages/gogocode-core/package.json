@@ -1,5 +1,5 @@
 {
-    "name": "gogocode",
+    "name": "@zcatpkg/gogocode",
     "version": "1.0.53",
     "description": "The simplest tool to parse/transform/generate code on ast",
     "keywords": [
@@ -29,7 +29,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:thx/gogocode.git"
+        "url": "git@github.com:zhuscat/gogocode.git"
     },
     "author": "yexi",
     "license": "MIT",

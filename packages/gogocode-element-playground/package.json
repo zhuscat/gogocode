@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-vue-playground",
+  "name": "@zcatpkg/gogocode-vue-playground",
   "version": "1.0.0",
   "description": "gogocode vue playground",
   "main": "main/index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-plugin-vue2magix",
+  "name": "@zcatpkg/gogocode-plugin-vue2magix",
   "version": "0.0.1",
   "description": "gogocode-plugin-sample",
   "scripts": {

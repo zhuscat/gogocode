@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-plugin-prettier",
+  "name": "@zcatpkg/gogocode-plugin-prettier",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",

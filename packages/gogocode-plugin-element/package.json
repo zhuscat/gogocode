@@ -1,5 +1,5 @@
 {
-  "name": "gogocode-plugin-element",
+  "name": "@zcatpkg/gogocode-plugin-element",
   "version": "0.0.3",
   "description": "",
   "main": "index.js",
