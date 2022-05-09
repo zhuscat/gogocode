@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/gogocode.svg)](https://www.npmjs.com/package/gogocode) [![license](https://img.shields.io/npm/l/gogocode.svg)](LICENSE) 
 
+因为官方看起来不怎么维护了，但是一个项目已经入坑了，只能 fork 一份出来改
 
 ## What is GoGoCode?
 
