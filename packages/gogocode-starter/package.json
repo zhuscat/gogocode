@@ -18,7 +18,7 @@
     "htmlparser2",
     "parse5",
     "ast",
-    "gogocode"
+    "@zcatpkg/gogocode"
   ],
   "scripts": {
     "start": "node src/start.js"
@@ -30,6 +30,6 @@
   "author": "zhuori",
   "license": "ISC",
   "dependencies": {
-    "gogocode": "^1.0.48"
+    "@zcatpkg/gogocode": "^1.0.48"
   }
 }

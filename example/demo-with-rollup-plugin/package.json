@@ -10,7 +10,7 @@
     "build": "rollup -c rollup.config.js"
   },
   "devDependencies": {
-    "gogocode": "^0.2.24",
+    "@zcatpkg/gogocode": "^0.2.24",
     "rollup": "^2.48.0"
   }
 }

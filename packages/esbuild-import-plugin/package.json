@@ -26,7 +26,7 @@
   "author": "kooriko",
   "license": "ISC",
   "dependencies": {
-    "gogocode": "^1.0.3"
+    "@zcatpkg/gogocode": "^1.0.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.170",

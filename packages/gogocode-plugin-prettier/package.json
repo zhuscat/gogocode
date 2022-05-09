@@ -6,7 +6,7 @@
   "scripts": {},
   "keywords": [
     "vue",
-    "gogocode",
+    "@zcatpkg/gogocode",
     "prettier"
   ],
   "author": "chibing.fy",

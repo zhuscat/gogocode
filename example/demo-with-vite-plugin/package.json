@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "gogocode": "^0.2.24",
+    "@zcatpkg/gogocode": "^0.2.24",
     "vite": "^2.3.3"
   }
 }

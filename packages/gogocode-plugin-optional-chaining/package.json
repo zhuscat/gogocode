@@ -6,7 +6,7 @@
     "start": "node ./test/run.js"
   },
   "keywords": [
-    "gogocode",
+    "@zcatpkg/gogocode",
     "ast"
   ],
   "main": "transform.js",
@@ -16,6 +16,6 @@
     "node": "*"
   },
   "devDependencies": {
-    "gogocode": "^1.0.48"
+    "@zcatpkg/gogocode": "^1.0.48"
   }
 }
