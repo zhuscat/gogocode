@@ -194,6 +194,35 @@ const core = {
         const { nodePathList, matchWildCardList } = core.getAstsBySelector(ast, selector, { strictSequence, deep: 'nn', parseOptions: this.parseOptions || parseOptions, expando });
         const originReplacer = replacer
         nodePathList.forEach((path, i) => {
+            // 一个不一定能很好保证 comments 节点的策略，试试
+            function preserveComments(path, replacerAst) {
+                const replacerLeadingComments = replacerAst?.comments?.filter(comment => comment.leading) || [];
+                const replacerTrailingComments = replacerAst?.comments?.filter(comment => comment.trailing) || [];
+                const originLeadingComments = path?.node?.comments?.filter(comment => comment.leading) || [];
+                const originTrailingComments = path?.node?.comments?.filter(comment => comment.trailing) || [];
+                if (replacerLeadingComments.length === 0 && originLeadingComments.length > 0) {
+                    replacerAst.comments = [...originLeadingComments.map(item => {
+                        return {
+                            type: item.type,
+                            value: item.value,
+                            leading: item.leading,
+                            trailing: item.trailing,
+                        }
+                    }), ...replacerAst.comments];
+                }
+                if (replacerTrailingComments.length === 0 && originTrailingComments.length > 0) {
+                    replacerAst.comments = [...replacerAst.comments, ...originTrailingComments.map(item => {
+                        return {
+                            type: item.type,
+                            value: item.value,
+                            leading: item.leading,
+                            trailing: item.trailing,
+                        }
+                    })
+                    ]
+                }
+            }
+
             const extra = matchWildCardList[i];
             replacer = originReplacer
             if (typeof replacer == 'function') {
@@ -285,6 +314,9 @@ const core = {
                     if (replacerAst.expression && replacerAst.expression.type != 'AssignmentExpression' && path.parentPath.name != 'body') {
                         replacerAst = replacerAst.expression
                     }
+
+                    preserveComments(path, replacerAst)
+
                     path && core.replaceAstByAst(path, replacerAst);
                 }
             } else {
@@ -304,6 +336,9 @@ const core = {
                     if (replacerAst.expression && replacerAst.expression.type != 'AssignmentExpression' && path.parentPath.name != 'body') {
                         replacerAst = replacerAst.expression
                     }
+
+                    preserveComments(path, replacerAst)
+
                     path && core.replaceAstByAst(path, replacerAst);
                 } else {
                     if (replacer[0] && replacer[0].nodePath) {
