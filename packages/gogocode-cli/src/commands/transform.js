@@ -14,7 +14,7 @@ let PWD_PATH, CLI_INSTALL_PATH, SHOW_INFO;
 const EXCLUDE_FILES = ['.gif', '.jpg', '.png', '.jpeg', '.css', '.less', '.map', '.ico', '.ttf', '.woff', '.woff2'];
 const FILE_LIMIT_SIZE = 1024 * 200;
 
-function checkPath(srcPath, outPath, transform) {
+function checkPath(srcPath, outPath, transform, force) {
     return new Promise((resolve, reject) => {
         if (!srcPath) {
             console.error(`command error: need -s or --src`);
@@ -81,22 +81,26 @@ function checkPath(srcPath, outPath, transform) {
         }
         //check same path
         if (srcAbsPath === outAbsPath) {
-            inquirer.prompt([
-                {
-                    type: 'confirm',
-                    name: 'samePath',
-                    message: 'source path and output path is same. source file will be rewrite! to be continue?',
-                    default: false,
-                }
-            ]).then(answers => {
-                if (answers.samePath) {
-                    resolve();
-                } else {
+            if (force) {
+                resolve()
+            } else {
+                inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'samePath',
+                        message: 'source path and output path is same. source file will be rewrite! to be continue?',
+                        default: false,
+                    }
+                ]).then(answers => {
+                    if (answers.samePath) {
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                }).catch(() => {
                     reject();
-                }
-            }).catch(() => {
-                reject();
-            });
+                });
+            }
         } else {
             resolve();
         }
@@ -267,8 +271,13 @@ function logSuccess(result) {
         console.log();
     }
 }
-function confirmTransformLargeFiles(files) {
+function confirmTransformLargeFiles(files, force) {
     return new Promise((resolve, reject) => {
+        // 如果是强制转换，不去转换大于 FILE_LIMIT_SIZE 的文件
+        if (force) {
+            resolve(false)
+            return
+        }
         //排除图片等其他类型文件。并且文件大小小于FILE_LIMIT_SIZE
         const count = files.filter(f => (f.size > FILE_LIMIT_SIZE && EXCLUDE_FILES.indexOf(path.extname(f.path)) < 0)).length;
         if (count > 0) {
@@ -325,7 +334,7 @@ function paramsToOptions(params, options) {
  * @param {*} resolve 
  * @param {*} reject 
  */
-function handleTransform(tranFns, srcPath, outPath, params, resolve, reject) {
+function handleTransform(tranFns, srcPath, outPath, params, resolve, reject, force) {
     try {
         const srcFullPath = path.resolve(PWD_PATH, srcPath);
         const outFullPath = path.resolve(PWD_PATH, outPath);
@@ -341,7 +350,7 @@ function handleTransform(tranFns, srcPath, outPath, params, resolve, reject) {
 
         if (srcIsDir) {
             const files = fileUtil.listFiles(srcFullPath);
-            confirmTransformLargeFiles(files).then((canTransformLargeFiles) => {
+            confirmTransformLargeFiles(files, force).then((canTransformLargeFiles) => {
                 //canTransformLargeFiles 是否大文件转换，true：转换
                 preTransform(tranFns, options);
 
@@ -392,7 +401,7 @@ function handleTransform(tranFns, srcPath, outPath, params, resolve, reject) {
         reject(error);
     }
 }
-function handleCommand({ srcPath, outPath, transform, params, resolve, reject }) {
+function handleCommand({ srcPath, outPath, transform, params, force, resolve, reject }) {
 
     console.log();
     console.log(chalk.green(`transform start`));
@@ -403,13 +412,13 @@ function handleCommand({ srcPath, outPath, transform, params, resolve, reject })
     Promise.all(tempArr.map((tPath) =>
         requireTransforms(tPath)
     )).then((tranFns) => {
-        handleTransform(tranFns, srcPath, outPath, params ,resolve, reject);
+        handleTransform(tranFns, srcPath, outPath, params ,resolve, reject, force);
     }).catch((error) => {
         console.error(error);
         reject(error);
     });
 }
-module.exports = ({ src: srcPath, out, transform, dry, params, info }) => {
+module.exports = ({ src: srcPath, out, transform, dry, params, info, force }) => {
     // 没有输出路径，使用输入路径代替。做替换操作
     let outPath = out || srcPath;
     if (!out && srcPath) {
@@ -431,8 +440,8 @@ module.exports = ({ src: srcPath, out, transform, dry, params, info }) => {
         outPath = tempPath;
     }
     return new Promise((resolve, reject) => {
-        checkPath(srcPath, outPath, transform).then(() => {
-            handleCommand({ srcPath, outPath, transform, params ,resolve, reject });
+        checkPath(srcPath, outPath, transform, force).then(() => {
+            handleCommand({ srcPath, outPath, transform, params, force, resolve, reject });
         }).catch(() => {
             reject();
         });

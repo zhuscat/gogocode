@@ -25,6 +25,7 @@ const transform = require('./src/commands/transform');
         .option('-d, --dry', 'dry run (no changes are made to files)')
         .option('-p, --params <key=value>','params direct to plugin, eg: format=true#test=false, use \'#\' to join params')
         .option('-i, --info', 'show transform log info')
+        .option('-f, --force', 'force transform')
         .action((options) => {
             transform(options).then(() => { console.log(); }).catch(() => {
                 process.exit(1);
