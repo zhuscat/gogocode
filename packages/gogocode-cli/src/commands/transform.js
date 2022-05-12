@@ -334,7 +334,40 @@ function paramsToOptions(params, options) {
  * @param {*} resolve 
  * @param {*} reject 
  */
-function handleTransform(tranFns, srcPath, outPath, params, resolve, reject, force) {
+function handleTransform(tranFns, srcPath, outPath, params, resolve, reject, force, include, exclude) {
+    function createFilter() {
+        let includeMatchers = []
+        let excludeMatchers = []
+
+        if (include && include.length > 0) {
+            include.forEach(item => {
+                if (item instanceof RegExp) {
+                    return includeMatchers.push(item)
+                }
+
+                // 暂时不支持其他类型
+            })
+        }
+
+        if (exclude && exclude.length > 0) {
+            exclude.forEach(item => {
+                if (item instanceof RegExp) {
+                    return excludeMatchers.push(item)
+                }
+
+                // 暂时不支持其他类型
+            })
+        }
+
+        return function filter(filePath) {
+            const isIncluded = includeMatchers.length > 0 ? includeMatchers.some(matcher => matcher.test(filePath)) : true
+            const isExcluded = excludeMatchers.length > 0 ?  excludeMatchers.some(matcher => matcher.test(filePath)) : false
+            return isIncluded && !isExcluded
+        }
+    }
+
+    const fileFilter = createFilter()
+
     try {
         const srcFullPath = path.resolve(PWD_PATH, srcPath);
         const outFullPath = path.resolve(PWD_PATH, outPath);
@@ -366,7 +399,7 @@ function handleTransform(tranFns, srcPath, outPath, params, resolve, reject, for
                             console.log(`${chalk.blue(`${index}/${total}`)} ${srcFilePath} ${chalk.green(`${size} B`)}`);
                         }
                         const ext = path.extname(srcFilePath);
-                        if (EXCLUDE_FILES.indexOf(ext) > -1 || (!canTransformLargeFiles && size > FILE_LIMIT_SIZE)) {
+                        if (EXCLUDE_FILES.indexOf(ext) > -1 || (!canTransformLargeFiles && size > FILE_LIMIT_SIZE) || !fileFilter(srcFilePath)) {
                             fse.copyFileSync(srcFilePath, outFilePath);
                         } else {
                             const { success } = execTransforms(tranFns, options, srcFilePath, outFilePath);
@@ -401,7 +434,7 @@ function handleTransform(tranFns, srcPath, outPath, params, resolve, reject, for
         reject(error);
     }
 }
-function handleCommand({ srcPath, outPath, transform, params, force, resolve, reject }) {
+function handleCommand({ srcPath, outPath, transform, params, force, resolve, reject, include, exclude }) {
 
     console.log();
     console.log(chalk.green(`transform start`));
@@ -412,13 +445,13 @@ function handleCommand({ srcPath, outPath, transform, params, force, resolve, re
     Promise.all(tempArr.map((tPath) =>
         requireTransforms(tPath)
     )).then((tranFns) => {
-        handleTransform(tranFns, srcPath, outPath, params ,resolve, reject, force);
+        handleTransform(tranFns, srcPath, outPath, params ,resolve, reject, force, include, exclude);
     }).catch((error) => {
         console.error(error);
         reject(error);
     });
 }
-module.exports = ({ src: srcPath, out, transform, dry, params, info, force }) => {
+module.exports = ({ src: srcPath, out, transform, dry, params, info, force, include, exclude }) => {
     // 没有输出路径，使用输入路径代替。做替换操作
     let outPath = out || srcPath;
     if (!out && srcPath) {
@@ -441,7 +474,7 @@ module.exports = ({ src: srcPath, out, transform, dry, params, info, force }) =>
     }
     return new Promise((resolve, reject) => {
         checkPath(srcPath, outPath, transform, force).then(() => {
-            handleCommand({ srcPath, outPath, transform, params, force, resolve, reject });
+            handleCommand({ srcPath, outPath, transform, params, force, resolve, reject, include, exclude });
         }).catch(() => {
             reject();
         });

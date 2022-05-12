@@ -28,6 +28,7 @@
     "cross-spawn": "^7.0.3",
     "fs-extra": "^9.1.0",
     "inquirer": "^8.1.0",
+    "minimatch": "^5.0.1",
     "progress": "^2.0.3",
     "semver": "^7.3.5"
   },
