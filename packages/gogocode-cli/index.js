@@ -42,20 +42,19 @@ const fs = require('fs');
                 }
                 if (fs.existsSync(configPath)) {
                     const config = require(configPath)
-                    options.out = config.out || options.out
-                    options.src = config.src || options.src
-                    options.dry = config.dry || options.dry
-                    options.info = config.info || options.info
-                    options.force = config.force || options.force
-                    options.params = config.params || {}
+                    options = {
+                        ...options,
+                        ...config
+                    }
+
+                    options.params = options.params || {}
+
                     if (config.includeRules) {
                         options.params['include-rules'] = config.includeRules.join(',')
                     }
                     if (config.excludeRules) {
                         options.params['exclude-rules'] = config.excludeRules.join(',')
                     }
-                    options.include = config.include
-                    options.exclude = config.exclude
                 } else {
                     options.config = null
                 }
