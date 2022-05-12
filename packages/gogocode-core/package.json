@@ -1,6 +1,6 @@
 {
     "name": "@zcatpkg/gogocode",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "The simplest tool to parse/transform/generate code on ast",
     "keywords": [
         "babel",
