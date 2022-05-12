@@ -55,6 +55,7 @@ const fs = require('fs');
                     if (config.excludeRules) {
                         options.params['exclude-rules'] = config.excludeRules.join(',')
                     }
+                    options.params = Object.keys(options.params).map(key => `${key}=${options.params[key]}`).join('#')
                 } else {
                     options.config = null
                 }
