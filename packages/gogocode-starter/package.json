@@ -1,6 +1,6 @@
 {
   "name": "@zcatpkg/gogocode-starter",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "gogocode examples",
   "keywords": [
     "babel",
@@ -30,7 +30,7 @@
   "author": "zhuori",
   "license": "ISC",
   "dependencies": {
-    "@zcatpkg/gogocode": "^1.2.0"
+    "@zcatpkg/gogocode": "^1.3.0"
   },
   "publishConfig": {
     "access": "public"
