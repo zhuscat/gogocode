@@ -8,6 +8,12 @@ const path = require('path');
  * @returns 
  */
 function listFiles(rootPath, excludePath) {
+    if (!excludePath) {
+        excludePath = ['.git']
+    } else if (Array.isArray(excludePath)) {
+        excludePath.push('.git')
+    }
+
     let fileList = [];
     getFiles(rootPath, fileList, excludePath);
     return fileList;
